@@ -9,8 +9,8 @@ But if you want to make changes to the map or items,
 make changes to map.py and finalItems.py respectively.
 
 TO-DO:
-1) Locks(one door)
-2) Shop
+1) Locks(both)
+2) Shop(testing)
 3) Alley Boss(done)
 4) Endings(draft)
 5) Bacon trick
