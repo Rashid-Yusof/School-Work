@@ -69,14 +69,14 @@ def remove_spaces(text):
     
 def filter_words(words, skip_words):
     copy_list = []
-    words = words.split()
+    words = (words.lower()).split()
     
     for word in words:
         if not (word in skip_words):
             copy_list.append(word)
-    return copy_list
+    return ''.join(copy_list)
     
-#print (filter_words("help me please", ["me", "please"]))
+#print (filter_words("BEauTiful NorTh", skip_words))
     
 def normalise_input(user_input):
     user_input = remove_punct(user_input)

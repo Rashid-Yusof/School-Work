@@ -25,8 +25,9 @@ room_kitchen = {
     a 'pot noodle storage room'. There is barely enough room to move
     in here. There is a bin overflowing with sachets containing soy
     sauce. There's a microwave with a thick layer of rust around the
-    frame. There is a fridge but it currently isn't plugged in. This
-    room contains a door.
+    frame. There is a fridge but it currently isn't plugged in. There
+    are several cooking utensils lying around. Despite the possibility 
+    of food poisoning, you could probably cook something here.
     """,
 
     "exits": {"east": "Hall"},
@@ -77,7 +78,7 @@ room_exit = {
 
     "exits": {"north": "Hall", "east": "Outside"},
 
-    "items": [item_trousers]
+    "items": [item_trousers, item_frying_pan]
     }
     
 room_outside = {
@@ -124,16 +125,19 @@ room_alley = {
     "items": []
 }
 room_alley_after = {
-    "name": "Alley",
+    "name": "Alley_After",
 
     "description":
-    """
-    
+    """The tramp's blood covers the floor. You are able to pick up his urine 
+    filled shoes and claim them for your own, you should also consider moving 
+    his body incase a witness passes by. Light enters the alley from the south
+    where the bus stop is visible, and from the northwhich leads back to 
+    Senghenydd. 
     """,
 
     "exits": {"north": "Outside", "south": "Bus Stop"},
 
-    "items": [item_shoes]
+    "items": [item_shoes , item_beggar]
 }
 room_bus = {
     "name": "Bus Stop",
@@ -158,5 +162,6 @@ rooms = {
     "Outside": room_outside,
     "Shop": room_shop,
     "Alley": room_alley,
+    "Alley_After": room_alley_after,
     "Bus Stop": room_bus
 }

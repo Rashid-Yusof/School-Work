@@ -3,6 +3,7 @@ from player import *
 from finalItems import *
 from gameparser import *
 import string
+sense = True
 
 #changes: inventory 6, clothes inventory, check self
 """ To do: 
@@ -20,7 +21,7 @@ def check_self(thing):
         for item in wearing:
             print (item['id'])
     else:
-        print ('You are naked.')
+        print ('You are naked, other than that everthing seems normal.')
 
 def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
@@ -121,12 +122,13 @@ def print_room(room):
     <BLANKLINE>
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
-    print('')
-    print(room["name"].upper())
-    print('')
-    print(room["description"])
-    print('')
-    print_room_items(room)
+    if sense == True:
+        print('')
+        print(room["name"].upper())
+        print('')
+        print(room["description"])
+        print('')
+        print_room_items(room)
 
 def exit_leads_to(exits, direction):
     """This function takes a dictionary of exits and a direction (a particular
@@ -191,6 +193,7 @@ def print_menu(exits, room_items, inv_items):
         print ('DROP', item['id'].upper(),'to drop',item['name'].upper())
     print ('CHECK SELF to check what you are wearing')
     print('What do you want to do?')
+    print ()
 
 
 def is_valid_exit(exits, chosen_exit):
@@ -343,12 +346,18 @@ def move(exits, direction):
 # This is the entry point of our program
 def main():
     
+    global sense
     while True:
+        roomfirst = current_room
         print_room(current_room)
         print_inventory_items(inventory)
         command = menu(current_room["exits"], current_room["items"], inventory)
         command = command.split()
         execute_command(command)
+        if roomfirst == current_room:
+            sense = False
+        else:
+            sense = True
 
 
 

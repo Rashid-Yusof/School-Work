@@ -1,9 +1,10 @@
 #laptop and bacon
+#change plastic knife
 
 item_pen = 	{"id" : "pen" ,
 			"name": "a pen",
 			"description": "A small green ballpoint pen. Who buys green pens?",
-			"damage_beggar": 20, 
+			"damage_beggar": 100, 
 			"damage_player": 5,
                  "usage" : False,
                  "room_to_use" : "",
@@ -13,7 +14,7 @@ item_pen = 	{"id" : "pen" ,
 item_plastic_knife = 	{"id" : "knife" , 
 						"name" : "a plastic knife", 
 						"description": "A leftover plastic knife from a late night cheesy chip.",
-						"damage_beggar": 0, 
+						"damage_beggar": 80, 
 						"damage_player": 10,
                                   "usage" : False,
                                   "room_to_use" : "",
@@ -164,6 +165,16 @@ item_trousers = { "id" : "trousers" ,
 				"name" : "your trousers", 
 				"description": "The great thing about jeans is you can wear them even when you rip them. ",
 				"damage_beggar": 0, 
+				"damage_player": 0,
+                       "usage" : False,
+                       "room_to_use" : "",
+                       "item_effect" : ""
+				}
+    
+item_beggar = { "id" : "beggar" , 
+				"name" : "beggar's dead body", 
+				"description": "You take the bloody body and stash it in your inventory... Your not sure if that makes sense outside a text-based game context...",
+                "damage_beggar": 0, 
 				"damage_player": 0,
                        "usage" : False,
                        "room_to_use" : "",
