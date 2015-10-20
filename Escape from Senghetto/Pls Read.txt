@@ -1,0 +1,21 @@
+For some reason program cannot import items from
+finalmap, so I copy pasted the code into
+map.py.
+
+I'm not really sure if the program will work without either files,
+so just don't delete anything lol.
+
+But if you want to make changes to the map or items,
+make changes to map.py and finalItems.py respectively.
+
+TO-DO:
+1) Locks(one door)
+2) Shop
+3) Alley Boss(done)
+4) Endings(draft)
+5) Bacon trick
+6) sell laptop
+7) optional: Colored text to make things more readable.
+8) using items
+
+*You can add more things here if we missed something!
