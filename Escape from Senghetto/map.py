@@ -14,7 +14,7 @@ room_bedroom = {
 
     "exits": {"south": "Hall"},
 
-    "items": [item_pen , item_belt]
+    "items": [item_pen , item_belt, item_phone]
 }
 
 room_kitchen = {
@@ -51,7 +51,7 @@ room_hall = {
 
     "exits": {"north": "Bedroom", "east": "Bathroom", "south": "Exit", "west": "Kitchen" },
 
-    "items": [item_bulb, item_pumpkin]
+    "items": [item_bulb, item_pumpkin, item_laptop]
 }
 
 room_bathroom = {
@@ -134,7 +134,7 @@ room_alley_after = {
     """The tramp's blood covers the floor. You are able to pick up his urine 
     filled shoes and claim them for your own, you should also consider moving 
     his body incase a witness passes by. Light enters the alley from the south
-    where the bus stop is visible, and from the northwhich leads back to 
+    where the bus stop is visible, and from the north which leads back to 
     Senghenydd. 
     """,
 

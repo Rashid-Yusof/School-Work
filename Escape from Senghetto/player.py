@@ -1,10 +1,9 @@
-from items import *
 from finalItems import *
 from map import rooms
 
 player = {"health": 40, "alive": True}
 
-inventory = [item_laptop]
+inventory = []
 
 wearing = []
 

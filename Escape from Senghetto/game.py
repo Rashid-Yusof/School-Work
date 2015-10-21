@@ -289,7 +289,7 @@ def print_menu(exits, room_items, inv_items):
         print()
     for item in inv_items:
         if item is item_bacon:
-            print('COOK', item['id'].upper(),'to use',item['name'].upper(),"\n")
+            print('COOK', item['id'].upper(),'to cook',item['name'].upper(),"\n")
         else:
             print ('USE', item['id'].upper(),'to use',item['name'].upper())
     if len(inv_items) > 0:
@@ -336,20 +336,22 @@ def execute_beat():
             return
         else:
             print_inventory_items(inventory)
-            user_input = input("Which item do you want to use? ")
+            user_input = input("Which item do you want to use?(Attacking uses energy) \n>")
             item = normalise_input(user_input)
             if check_item(item):
                 thing = item
             else:
                  print("You don't have this item.")
-                 thing = input(print("Enter a valid item "))
+                 thing = normalise_input(input(print("Enter a valid item ")))
                  while check_item(thing) is False:
                      print("You don't have this item.")
-                     thing = input(print("Enter a valid item "))
+                     thing = normalise_input(input(print("Enter a valid item ")))
                      
             constitution["Health"]-= items[thing]['damage_beggar']
             player["health"] -= items[thing]['damage_player']
             inventory.remove(items[thing])
+            print(items[thing]['battle_effect'])
+            print ()
             print("Your health: ", player["health"], "\t\tBeggar's health: ", constitution["Health"])
             if constitution["Health"] <= 0:
                 constitution["alive"] = False
@@ -381,9 +383,10 @@ def beggar_fight():
                     return
                 else:
                     current_room = rooms["Outside"]
-                    print ("You don't have enough money.")
+                    print ("You don't have enough money. The beggar kicks you out of the alley.")
                     return
-            if yes_no == 'no': 
+            if yes_no == 'no':
+                print ('The beggar is resilient! He starts moving towards you!')
                 if execute_beat() == True:
                     return True
                 else:

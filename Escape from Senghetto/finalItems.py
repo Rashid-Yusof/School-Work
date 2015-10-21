@@ -4,21 +4,22 @@
 item_pen = 	{"id" : "pen" ,
 			"name": "a pen",
 			"description": "A small green ballpoint pen. Who buys green pens?",
-			"damage_beggar": 20, 
-			"damage_player": 5,
+			"damage_beggar": 10, 
+			"damage_player": 10,
                  "usage" : False,
                  "room_to_use" : "",
-                 "item_effect" : ""
+                 "battle_effect" : "You throw the pen! The barrel breaks and stains the beggar's shirt!\
+ The beggar is enraged and stains you back with nearby sludge!"
 			}
 
 item_plastic_knife = 	{"id" : "knife" , 
 						"name" : "a plastic knife", 
 						"description": "A leftover plastic knife from a late night cheesy chip.",
-						"damage_beggar": 40, 
+						"damage_beggar": 30, 
 						"damage_player": 10,
                                   "usage" : False,
                                   "room_to_use" : "",
-                                  "item_effect" : ""
+                                  "battle_effect" : "You use the plastic knife! But, it breaks due to poor quality..."
 						}
 
 item_toilet_roll = 	{"id" : "roll" , 
@@ -28,7 +29,7 @@ item_toilet_roll = 	{"id" : "roll" ,
 					"damage_player": 10,
                              "usage" : False,
                              "room_to_use" : "",
-                             "item_effect" : ""
+                             "battle_effect" : "You throw the toilet roll! The sandpaper texture makes the beggar's skin very irritated."
 					}
 
 item_frying_pan = 	{"id" : "pan", 
@@ -38,7 +39,7 @@ item_frying_pan = 	{"id" : "pan",
 					"damage_player": 5,
                              "usage" : False,
                              "room_to_use" : "Kitchen",
-                             "item_effect" : ""
+                             "battle_effect" : "You swing the pan! Ok now that's just heartless of you."
 					}
 
 item_bulb = 	{"id" : "bulb" , 
@@ -48,7 +49,8 @@ item_bulb = 	{"id" : "bulb" ,
 				"damage_player": 30,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : ""
+                       "battle_effect" : "You strike with the glass bulb! The bulb shatters in your hand and the glass gets all over...\
+ Clearly this was not a bright idea."
 				}
 
 item_sponge = 	{ "id" : "sponge" , 
@@ -58,27 +60,28 @@ item_sponge = 	{ "id" : "sponge" ,
 				"damage_player": 5,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : ""
+                       "battle_effect" : "You... clean the beggar? The beggar is pleased by your efforts.\
+ Lots of unknown substances get all over you over the process of cleaning..."
 				}
 
 item_belt = 	{ "id" : "belt" , 
 				"name" : "a belt", 
 				"description": "Standard belt for holding up a pair of trousers. Can also fit around ones head as a hilarious joke when drunk.",
-				"damage_beggar": 15, 
+				"damage_beggar": 20, 
 				"damage_player": 5,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : ""
+                       "battle_effect" : "You use the belt! *insert horrible visuals here*"
 				}
 
 item_stone = 	{ "id" : "stone" , 
 				"name" : "a stone", 
 				"description": "Wow man, that's totally a stone dude.",
-				"damage_beggar": 30, 
+				"damage_beggar": 10, 
 				"damage_player": 5,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : ""
+                       "battle_effect" : "You throw the stone! It hits pretty HARD. HAHAHAHahahaha..ha.. *sigh*"
 				}
 
 item_pumpkin = 	{ "id" : "pumpkin" , 
@@ -88,17 +91,18 @@ item_pumpkin = 	{ "id" : "pumpkin" ,
 				"damage_player": 5,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : ""
+                       "battle_effect" : "You use the pumpkin! The beggar is confused by the meaning of the phallic symbol on the pumpkin.."
 				}
 
 item_phone = 	{ "id" : "phone" , 
 				"name" : "your cell phone", 
 				"description": "Your trusty mobile phone. You never go anywhere without it. It's dead, as usual.",
-				"damage_beggar": 10, 
-				"damage_player": 5,
+				"damage_beggar": 0, 
+				"damage_player": 15,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : ""
+                       "battle_effect" : "You threaten the beggar by calling the police! The beggar tells you that your the one attacking him with random objects...\
+ You shut your phone promptly."
 				}
 
 item_wand = 	{ "id" : "wand" , 
@@ -108,7 +112,8 @@ item_wand = 	{ "id" : "wand" ,
 				"damage_player": 5,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : ""
+                       "battle_effect" : "You wave the wand and believe in the MAGIC like Peter Pan says so! Unexpectedly, the wand starts glowing! You start chanting random spells... \
+ 'Abracadabra!', 'Bippity Boppity Boo!'. Light englufs the area!"
 				}
 
 item_bacon = 	{ "id" : "bacon" , 
@@ -124,11 +129,12 @@ item_bacon = 	{ "id" : "bacon" ,
 item_laptop = 	{ "id" : "laptop" , 
 				"name" : "your laptop", 
 				"description": "Your laptop is... well it has Microsoft Word and Netflix, and that's good enough for you.",
-				"damage_beggar": 50, 
+				"damage_beggar": 30, 
 				"damage_player": 10,
                        "usage" : False,
                        "room_to_use" : "",
-                       "item_effect" : "You sell your laptop to the guy for £100 and now have enough money for the wand. You're not sure how you're going to do your assignments now. But hey wands right? totally worth it. (What are you doing with your life?)"
+                       "item_effect" : "You sell your laptop to the guy for £100 and now have enough money for the wand. You're not sure how you're going to do your assignments now. But hey wands right? totally worth it. (What are you doing with your life?)",
+                       "battle_effect" : "You toss the laptop at the beggar! Well there goes a good 500 pounds..."
 				}
 
 item_shoes = 	{ "id" : "shoes" , 
@@ -173,7 +179,7 @@ item_trousers = { "id" : "trousers" ,
     
 item_beggar = { "id" : "beggar" , 
 				"name" : "beggar's dead body", 
-				"description": "You take the bloody body and stash it in your inventory... Your not sure if that makes sense outside a text-based game context...",
+				"description": "You take the bloody body and wrap it in a large cloth. You'll dispose of this once you get somewhere far with the bus...",
                 "damage_beggar": 0, 
 				"damage_player": 0,
                        "usage" : False,
@@ -182,9 +188,9 @@ item_beggar = { "id" : "beggar" ,
 				}
 items = {
     "pen" : item_pen,
-    "plastic knife" : item_plastic_knife,
-    "toilet roll" : item_toilet_roll,
-    "frying pan" : item_frying_pan,
+    "knife" : item_plastic_knife,
+    "roll" : item_toilet_roll,
+    "pan" : item_frying_pan,
     "bulb" : item_bulb,
     "sponge" : item_sponge,
     "belt" : item_belt,
