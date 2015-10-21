@@ -11,6 +11,9 @@ global item_bacon
 game_loop = True
 sense = True
 bathroom_locked = True
+customer = False
+
+
 
 #changes: inventory 6, clothes inventory, check self
 """ nEw changes , move function, Line 342-348, bathroom lock
@@ -21,13 +24,18 @@ bacon trick
 """
 
 """ To do: 
-1) Locks
-2) Shop
-3) Alley Boss
-4) Endings
-5) Bacon trick
-6) sell laptop
+1) Endings
+2) sell laptop
 """
+
+def sell_laptop():
+    global customer
+    global money
+    if (current_room is rooms["Kitchen"]) and (customer is True) and (item_laptop in inventory):
+        money += 100
+        customer = False
+        inventory.remove(item_laptop)
+        print("\nYou have sold the laptop and you have £"+str(money)+" now. You're not sure how you're going to do your assignments now. But hey wands right? totally worth it. (What are you doing with your life?)\n")
 
 def print_shop_menu():
     print("\nItem\tPrice")
@@ -40,26 +48,35 @@ def print_shop_menu():
     else:
         print("What do you want to buy?")
         user_input = normalise_input(input('\n> '))
-        buy_item(user_input)
-        
+        if user_input == "wand" or user_input == "water":
+            buy_item(user_input)
+        else:
+            print("It is not a valid item.")
+            print_shop_menu()
+            
 def buy_item(user_input):
     global money
+    global inventory
     print()
     if ware[user_input]:
-        if money >= prices[user_input]:
-            money -= prices[user_input]
-            if user_input == "wand":
-                inventory.append(item_wand)
-                ware["wand"] =False
-                print("a wand is added to your inventory. You have £"+str(money)+" left.")
-            elif user_input == "water":
-                player["health"] = 100
-                ware["water"] = False
-                print("Health is 100% now. You have £"+str(money)+" left.")
+        if len(inventory) < 6:
+            if money >= prices[user_input]:
+                money -= prices[user_input]
+                if user_input == "wand":
+                    inventory.append(item_wand)
+                    ware["wand"] =False
+                    print("a wand is added to your inventory. You have £"+str(money)+" left.")
+                elif user_input == "water":
+                    player["health"] = 100
+                    ware["water"] = False
+                    print("You drink your water, your feel your hangover disappear. Your Health is 100% now. You have £"+str(money)+" left.")
+            else:
+                print("You don't have enough money.")
         else:
-            print("You don't have enough money.")
+            print("You can only carry 6 items!")
     else:
         print("Item is out of stock.")
+
         
 def go_outside():
     global current_room
@@ -67,40 +84,38 @@ def go_outside():
         current_room = rooms["Outside"]
     else:
         print("You are not wearing all of your clothes.")    
-
+        
 def bacon_usage(item):
     global item_bacon
+    global customer
     global bathroom_locked
     if item['usage'] == True:
         bathroom_locked = False
+        customer = True
+        
         
 def laptop_usage(item):
     global item_laptop
     global money
     if item['usage'] == True:
         money += 100
-        
-#def laptop_usage(item):
-    #if laptop_usage == True:
-        #pass
 
 def print_usage(item):
     global item_bacon
     global bathroom_locked
     for thing in inventory:
         if thing['id'] == item:
-            if thing['room_to_use'] == current_room['name']:
+            if thing['room_to_use'] == current_room['name']: 
                 thing['usage'] = True
                 print (thing['item_effect'])
                 print ()
                 inventory.remove(thing)
                 bacon_usage(thing)
-                laptop_usage(thing)
+                #laptop_usage(thing)
                 return
             else:
                 print ("You try to use", thing['id'] + '... ', "It fails to do whatever ludicrous idea you had for it.")
                 print()
-
         
 def check_self(thing):
     global wearing
@@ -110,7 +125,7 @@ def check_self(thing):
             print (item['name'])
     else:
         print ('You are naked, other than that everthing seems normal.')
-        print ()
+    print ("You have £", str(money) , ".\n")
 
 def list_of_items(items):
     """This function takes a list of items (see items.py for the definition) and
@@ -212,13 +227,19 @@ def print_room(room):
     <BLANKLINE>
     Note: <BLANKLINE> here means that doctest should expect a blank line.
     """
+    global customer
+    global current_room
     if sense == True:
         print('')
         print(room["name"].upper())
         print('')
         print(room["description"])
         print('')
-        print_room_items(room)
+    if current_room == rooms['Kitchen'] and customer == True:
+        print ("There is a strange looking man wearing a towel happily eating bacon in the corner.\
+ He asks you do you know where to buy a cheap laptop?")
+        print ()
+    print_room_items(room)
 
 def exit_leads_to(exits, direction):
     """This function takes a dictionary of exits and a direction (a particular
@@ -249,45 +270,37 @@ def print_exit(direction, leads_to):
     print("GO " + direction.upper() + " to go to the " + leads_to + ".")
 
 
+
 def print_menu(exits, room_items, inv_items):
-    """This function displays the menu of available actions to the player. The
-    argument exits is a dictionary of exits as exemplified in map.py. The
-    arguments room_items and inv_items are the items lying around in the room
-    and carried by the player respectively. The menu should, for each exit,
-    call the function print_exit() to print the information about each exit in
-    the appropriate format. The room into which an exit leads is obtained
-    using the function exit_leads_to(). Then, it should print a list of commands
-    related to items: for each item in the room print
-    "TAKE <ITEM ID> to take <item name>."
-    and for each item in the inventory print
-    "DROP <ITEM ID> to drop <item name>."
-    For example, the menu of actions available at the Reception may look like this:
-    You can:
-    GO EAST to your personal tutor's office.
-    GO WEST to the parking lot.
-    GO SOUTH to MJ and Simon's room.
-    TAKE BISCUITS to take a pack of biscuits.
-    TAKE HANDBOOK to take a student handbook.
-    DROP ID to drop your id card.
-    DROP LAPTOP to drop your laptop.
-    DROP MONEY to drop your money.
-    What do you want to do?
-    """
-    print ('You can:')
-    
+    global customer
+    print ('YOU CAN:')
+    print ('¯¯¯¯¯¯¯¯')
     for key in exits:
         print_exit(key, exit_leads_to(exits, key))
+    if key in exits:
+        print()    
     for item in room_items:
         print ('TAKE',item['id'].upper(),'to take',item['name'].upper())
+    if len(room_items) > 0:
+        print()
     for item in inv_items:
         print ('DROP', item['id'].upper(),'to drop',item['name'].upper())
+    if len(inv_items) > 0:
+        print()
     for item in inv_items:
-        print ('USE', item['id'].upper(),'to use',item['name'].upper())
+        if item is item_bacon:
+            print('COOK', item['id'].upper(),'to use',item['name'].upper(),"\n")
+        else:
+            print ('USE', item['id'].upper(),'to use',item['name'].upper())
+    if len(inv_items) > 0:
+        print() 
     if current_room is rooms["Shop"]:
-        print("SHOW MENU to show the menu")
-    print ('CHECK SELF to check what you are wearing')
-    print('What do you want to do?')
-    print ()
+        print("SHOW MENU to show the menu\n")
+    if (current_room is rooms["Kitchen"]) and (item_laptop in inventory) and (customer is True):
+        print("SELL LAPTOP to sell laptop\n")
+    
+    print ('CHECK SELF to check what you are wearing\n')
+    print('What do you want to do?\n')
 
 
 def is_valid_exit(exits, chosen_exit):
@@ -310,9 +323,9 @@ def is_valid_exit(exits, chosen_exit):
 def check_item(item):
     for thing in inventory:
         if thing['id'] == item:
-            return thing
-
-
+            return True
+    return False
+    
 def execute_beat():
     global inventory
     global player
@@ -325,10 +338,18 @@ def execute_beat():
             print_inventory_items(inventory)
             user_input = input("Which item do you want to use? ")
             item = normalise_input(user_input)
-            thing = check_item(item)
-            constitution["Health"]-= thing['damage_beggar']
-            player["health"] -= thing['damage_player']
-            inventory.remove(thing)
+            if check_item(item):
+                thing = item
+            else:
+                 print("You don't have this item.")
+                 thing = input(print("Enter a valid item "))
+                 while check_item(thing) is False:
+                     print("You don't have this item.")
+                     thing = input(print("Enter a valid item "))
+                     
+            constitution["Health"]-= items[thing]['damage_beggar']
+            player["health"] -= items[thing]['damage_player']
+            inventory.remove(items[thing])
             print("Your health: ", player["health"], "\t\tBeggar's health: ", constitution["Health"])
             if constitution["Health"] <= 0:
                 constitution["alive"] = False
@@ -336,7 +357,8 @@ def execute_beat():
                 player["alive"] = False
     if player["alive"] and not constitution["alive"]:
         print("The beggar falls to the floor in a mess of blood.")
-        current_room = rooms["Alley_After"]
+        rooms["Alley"] = rooms["Crime Scene(Alley)"]
+        current_room = rooms["Crime Scene(Alley)"]
         return True
     else:
         print("You feel yourself feel weak as the beggar beats you to the floor. ")
@@ -344,17 +366,23 @@ def execute_beat():
         return False
         
 def beggar_fight():
+    global money
     global current_room
     global description
-    if current_room == rooms["Alley"]:
+    if current_room == rooms["Alley"] and constitution["alive"] == True:
         print (descriptions["angry homeless man"])
         while True:
             user_input = input("Do you wish to pay the beggar? ")
             yes_no = normalise_input(user_input)
             if yes_no == 'yes':
-            #take away money
-                print ("The beggar accepts the money and scrurries away.")
-                return
+                if money >= 1.50:    
+                    money -= 1.50
+                    print ("The beggar accepts the money and scrurries away.")
+                    return
+                else:
+                    current_room = rooms["Outside"]
+                    print ("You don't have enough money.")
+                    return
             if yes_no == 'no': 
                 if execute_beat() == True:
                     return True
@@ -396,11 +424,15 @@ def execute_take(item_id):
     """
     global inventory
     global current_room
+    global money
     for item in current_room['items']:
         if item_id == item['id']:
             global clothes
             for garment in clothes:
                 if item_id == garment['id']:
+                    if item_id == item_trousers['id']:
+                        money += 5.0
+                        print("\nYou realize there is money in your pockets!\nYou have £"+str(money)+" now.")
                     wearing.append(garment)
                     current_room['items'].remove(garment)
                     print(garment['description'])
@@ -478,6 +510,13 @@ def execute_command(command):
         if command[1] == 'menu':
             print_shop_menu()
             
+    elif command[0] == 'sell':
+        if command[1] == 'laptop':
+            sell_laptop()
+            
+    elif command[0] == 'cook':
+        if command[1] == 'bacon':
+            print_usage(command[1])
     else:
         print("This makes no sense.")
 
@@ -509,8 +548,9 @@ def move(exits, direction):
     pass
 
 def win_lose():
-
+    found = False
     global game_loop
+    global current_room
     if current_room == rooms["Bus Stop"]:
         print_room(rooms["Bus Stop"])
 
@@ -526,23 +566,30 @@ def win_lose():
                     if constitution["alive"] == False: #Player killed the beggar
 
                         if ware["wand"] == False: #Player bought the wand
-                            if rooms["Alley"]["items"] != item_beggar: #Player hid the beggar's dead body
-                                print (descriptions["hogwarts end credits"])
-                                game_loop = False
-                                return
-                            else: #Player did NOT hide the beggar's body
-                                print(descriptions["hogwarts alt credits"])
-                                game_loop = False
-                                return
+                            for item in rooms["Crime Scene(Alley)"]["items"]:
+                                if item['id'] == item_beggar['id']:#Player hid the beggar's dead body
+                                    found = True
+                                    if found == True:
+                                        print (descriptions["hogwarts alt credits"])
+                                        game_loop = False
+                                        return
+            
+                                #Player did NOT hide the beggar's body
+                            print(descriptions["hogwarts end credits"])
+                            game_loop = False
+                            return
                         else: #Player did NOT buy the wand
-                            if rooms["Alley"]["items"] != item_beggar: #Player hid the beggar's dead body
-                                print(descriptions["common credits"])
-                                game_loop = False
-                                return
-                            else: #Player did NOT hide the beggar's body
-                                print(descriptions["murder charge credits"])
-                                game_loop = False
-                                return
+                            for item in rooms["Crime Scene(Alley)"]["items"]:
+                                if item['id'] == item_beggar['id']: #Player hid the beggar's dead body
+                                    found = True
+                                    if found == True:
+                                        print(descriptions["murder charge credits"])
+                                        game_loop = False
+                                        return
+                                 #Player did NOT hide the beggar's body
+                            print(descriptions["common credits"])
+                            game_loop = False
+                            return
                     else: #Player did NOT kill the beggar
                         if ware["wand"] == False: #Player bought the wand
                             print (descriptions["hogwarts end credits"])
@@ -553,7 +600,8 @@ def win_lose():
                             game_loop = False
                             return
             else:
-                pass
+                current_room = rooms['Alley']
+                return
     
 
 
@@ -561,7 +609,9 @@ def win_lose():
 def main():
     global sense
     global game_loop
-    
+    print(descriptions["introduction_logo"])
+    input('> ')
+    print(descriptions["introduction"])
     while game_loop == True:
         roomfirst = current_room
         print_room(current_room)

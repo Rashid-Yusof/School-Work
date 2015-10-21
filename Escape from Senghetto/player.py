@@ -8,7 +8,7 @@ inventory = [item_laptop]
 
 wearing = []
 
-money = 5.0
+money = 0.0
   
 # Start game at the reception
 current_room = rooms["Bedroom"]

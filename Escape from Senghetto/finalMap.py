@@ -34,6 +34,9 @@ room_kitchen = {
 
     "items": [item_plastic_knife, item_sponge, item_bacon, item_top]
     }
+    
+
+
 room_hall = {
     "name": "Hall",
 
@@ -85,7 +88,7 @@ room_outside = {
     "name": "Outside",
 
     "description":
-    """You are standing outside a flat in Senghenydd, lucking quite close
+    """You are standing outside a flat in Senghenydd, looking quite close
     to the outskirts. There is a faint smell of someone burning toast and 
     a police siren is going off nearby. You can see a bus stop to the south, 
     however it is through quite a dark alley. To the east is a rather small
@@ -102,7 +105,7 @@ room_shop = {
     "description":
     """Not exactly Waitrose, this shop seems to only stock pot noodle, alcohol
     and family planning apparatus. The man standing behind the counter looks
-    vaguely familiar. He is wearing a tag saying "Kirill, here to help!" He
+    vaguely familiar. He is wearing a name tag saying "Kirill, here to help!" He
     smiles at you expectantly. The shop has one exit.
     """,
 
@@ -125,7 +128,7 @@ room_alley = {
     "items": []
 }
 room_alley_after = {
-    "name": "Alley_After",
+    "name": "Crime Scene(Alley)",
 
     "description":
     """The tramp's blood covers the floor. You are able to pick up his urine 
@@ -143,10 +146,10 @@ room_bus = {
     "name": "Bus Stop",
 
     "description":
-    """The whole world seems brighter on this side of the alleyway. There is
-    a bus stop and it just so happens that the bus is here at this precise
-    moment. The side of the bus declares that the price of a ticket is £1.80.
-    This bus is heading back to glorious Talybont.
+    """The whole world seems brighter on this side of the alleyway. There is\
+ a bus stop and it just so happens that the bus is here at this precise\
+ moment. The side of the bus declares that the price of a ticket is £1.80.\
+ This bus is heading back to glorious Talybont.\
     """,
 
     "exits": {"north": "Alley"},
@@ -162,6 +165,6 @@ rooms = {
     "Outside": room_outside,
     "Shop": room_shop,
     "Alley": room_alley,
-    "Alley_After": room_alley_after,
+    "Crime Scene(Alley)": room_alley_after,
     "Bus Stop": room_bus
 }
